@@ -1,0 +1,107 @@
+创建虚拟环境
+    创建：mkvirtualenv [虚拟环境名称]
+        mkvirtualenv h1
+    删除：rmvirtualenv [虚拟环境名称]
+        rmvirtualenv h1
+    进入：workon [虚拟环境名称]
+        workon h1
+    退出：deactivate
+
+    所有的虚拟环境，都位于/home/.virtualenvs目录下
+    进入虚拟环境前的提示：
+    (h1) super@ubuntu:~/Desktop$ 
+
+    查看当前的所有虚拟环境：workon [两次tab键]
+    查看虚拟环境中已经安装的包
+    pip list
+    pip freeze
+
+安装django
+建议安装1.8.2版本，这是一个稳定性高、使用广、文档多的版本
+    pip install django==1.8.2
+查看版本：进入python shell，运行如下代码
+    import django
+    django.get_version()
+说明：使用pip install django命令进行安装时，会自动删除旧版本，再安装新版本
+
+创建项目
+命令
+    django-admin startproject test1
+进入test1目录，目录结构如下图：
+        test1
+        │   ├── manage.py
+        │   └── test1
+        │       ├── __init__.py
+        │       ├── settings.py
+        │       ├── urls.py
+        │       └── wsgi.py
+
+目录说明
+    manage.py：一个命令行工具，可以使你用多种方式对Django项目进行交互
+内层的目录：项目的真正的Python包
+    _init _.py：一个空文件，它告诉Python这个目录应该被看做一个Python包
+    settings.py：项目的配置
+    urls.py：项目的URL声明
+    wsgi.py：项目与WSGI兼容的Web服务器入口
+
+本示例完成“图书-英雄”信息的维护，需要存储两种数据：图书、英雄
+图书表结构设计：
+    表名：BookInfo
+    图书名称：btitle
+    图书发布时间：bpub_date
+英雄表结构设计：
+    表名：HeroInfo
+    英雄姓名：hname
+    英雄性别：hgender
+    英雄简介：hcontent
+    所属图书：hbook
+图书-英雄的关系为一对多
+
+数据库配置
+    在settings.py文件中，通过DATABASES项进行数据库设置
+    django支持的数据库包括：sqlite、mysql等主流数据库
+    Django默认使用SQLite数据库
+
+创建应用
+在一个项目中可以创建一到多个应用，每个应用进行一种业务处理
+创建应用的命令：
+    python manage.py startapp booktest
+
+    ======================================
+    (h1) super@ubuntu:~/Desktop$ cd test1
+    (h1) super@ubuntu:~/Desktop/test1$ python3 manage.py startapp booktest
+    (h1) super@ubuntu:~/Desktop/test1$ tree
+    test1
+    ├── booktest
+    │   ├── admin.py
+    │   ├── __init__.py
+    │   ├── migrations
+    │   │   └── __init__.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   └── views.py
+    ├── manage.py
+    └── test1
+        ├── __init__.py
+        ├── __pycache__
+        │   ├── __init__.cpython-36.pyc
+        │   └── settings.cpython-36.pyc
+        ├── settings.py
+        ├── urls.py
+        └── wsgi.py
+
+定义模型类
+    有一个数据表，就有一个模型类与之对应
+    打开models.py文件，定义模型类
+    引入包from django.db import models
+    模型类继承自models.Model类
+    说明：不需要定义主键列，在生成时会自动添加，并且值为自动增长
+    当输出对象时，会调用对象的str方法
+
+
+
+
+
+
+
+
