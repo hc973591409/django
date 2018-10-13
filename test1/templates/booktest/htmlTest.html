@@ -7,6 +7,14 @@
     <title>html转义</title>
 </head>
 <body>
-    {{t1}} <h1>: 直接输出为转义，输入原始字符串</h1>
+    {{t1}} <h1>默认escape: 直接输出为转义，输入原始字符串</h1>
+    <hr>
+    {{t1|safe}} <h1>过滤器: 不转义</h1>
+    <hr>
+    {% autoescape off %}
+    {{ t1 }} <h1>使用便签关闭转义</h1>
+    {% endautoescape %}
+    <hr>
+    {{ t2|default:"<h1>qwer<h1>" }}
 </body>
 </html>
