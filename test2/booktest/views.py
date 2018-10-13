@@ -10,18 +10,26 @@ def index(request):
 def myexp(request):
     return HttpResponse('hello world')
 
+from .forms import UploadFileForm
+
+# Imaginary function to handle an uploaded file.
+from somewhere import handle_uploaded_file
 
 def upload_pic(request):
     return render(request, "booktest/upload_pic.html")
 
 
 def uploadHandler(request):
-    if request.method == "POST":
-        f1 = request.FILES['pic']
-        # fname = '%s/cars/%s' % (settings.MEDIA_ROOT,f1.name)
-        # with open(fname, 'w') as pic:
-        #     for c in f1.chunks():
-        #         pic.write(c)
-        return HttpResponse("ok")
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
     else:
-        return HttpResponse("error")
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
