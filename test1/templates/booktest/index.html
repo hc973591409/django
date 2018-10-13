@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <style>
+      .red_font{
+          color: red;
+      }
+      .green_font{
+          color: green;
+      }
+
+    </style>
+</head>
+<body>
+    <h1>hello world</h1>
+    <hr>
+    <h2>反向解析，用于根据namespace 和 name动态生成url，便于维护</h2>
+    <a href="{% url 'booktest:show' '123' '456' %}">显示链接</a>
+    <hr>
+    <ul>
+        <!-- 循环遍历 -->
+        {% for hero in hero_list %}
+        <li>
+            <!-- forloop.counter 可以得到当前输出的-->
+            {% if forloop.counter|divisibleby:'2' %}
+            <h2 class="red_font">{{forloop.counter}} : {{hero.name}}</h2>
+            {% else %}
+            <h2 class="green_font">{{forloop.counter}} : {{hero.name}}</h2>
+            {% endif %}
+        </li>
+        <!-- 当遍历列表为空的时候输出 -->
+        {% empty %}
+        <h2>啥也没找到</h2>
+
+        <!-- 结束DTL语句 -->
+        {% endfor %}
+
+    </ul>
+    <!-- <h1>{{hero.name}}</h1> -->
+    <!-- <h1>{{hero.show_gender}}</h1> -->
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'booktest/base.html' %}
+
+{% block title %}
+<title>用户首页</title>
+{% endblock title %}
+
+{% block head %}
+<style>
+    .box1{
+        float: left;
+        height: 500px;
+        width: 100px;
+        background: gold;
+    }
+    .box2{
+        float: left;
+        height: 500px;
+        width: 1400px;
+        background: cyan;
+    }
+</style>
+{% endblock head %}
+
+{% block main%}
+        <h1 class="box1">用<br />户<br />导<br />航</h1>   
+        <h1 class="box2">
+            {% block user_detail %}
+            {% endblock %}
+        </h1>   
+        <br />
+{% endblock main %}

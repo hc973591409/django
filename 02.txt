@@ -1,0 +1,9 @@
+一、创建项目
+    django-admin startproject test1
+
+二、创建app
+    进入test1目录
+    python manage.py startapp booktest
+
+三、修改模型类（models.py）
+四、修改setting 增加app，注册我们的模型类
